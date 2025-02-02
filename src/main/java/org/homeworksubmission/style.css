@@ -1,0 +1,10 @@
+/* PasswordField with only an underline */
+.underline-inputs {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent deepskyblue; /* Bottom border only */
+    -fx-border-width: 0 0 2px 0;  /* 2px thick bottom border */
+    -fx-focus-color: blue;         /* Blue underline on focus */
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 5 0 3 0;
+    -fx-prompt-text-fill: black;
+}
