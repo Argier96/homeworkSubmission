@@ -1,9 +1,9 @@
-package org.homeworksubmission;
+package org.homeworksubmission.pages;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class LoginPageController {
     @FXML
     private Label welcomeText;
 

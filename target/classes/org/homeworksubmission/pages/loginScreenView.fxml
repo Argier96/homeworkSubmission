@@ -37,19 +37,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.homeworksubmission.HelloController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.homeworksubmission.pages.LoginPageController">
     <AnchorPane style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
         <Label ellipsisString="" layoutX="156.0" layoutY="34.0" prefHeight="40.0" prefWidth="381.0" style="-fx-text-fill: DeepSkyBlue;" text="Homework Submission System">
             <font>
                 <Font name="AppleGothic Regular" size="24.0" />
             </font>
         </Label>
-        <PasswordField layoutX="156.0" layoutY="212.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" styleClass="underline-inputs" stylesheets="@style.css">
+        <PasswordField layoutX="156.0" layoutY="212.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" styleClass="underline-inputs" stylesheets="@../../../../java/org/homeworksubmission/style.css">
             <font>
                 <Font name="AppleGothic Regular" size="13.0" />
             </font>
         </PasswordField>
-        <TextField layoutX="156.0" layoutY="141.0" maxWidth="275.0" prefHeight="27.0" prefWidth="275.0" promptText="Username" styleClass="underline-inputs" stylesheets="@style.css" />
+        <TextField layoutX="156.0" layoutY="141.0" maxWidth="275.0" prefHeight="27.0" prefWidth="275.0" promptText="Username" styleClass="underline-inputs" stylesheets="@../../../../java/org/homeworksubmission/style.css" />
         <Button layoutX="313.0" layoutY="260.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: deepskyblue; -fx-underline: true; -fx-cursor: hand;" text="forgot password">
             <effect>
                 <Blend />
