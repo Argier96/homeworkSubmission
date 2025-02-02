@@ -1,4 +1,4 @@
-package org.homeworksubmission.homeworksubmission;
+package org.homeworksubmission;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

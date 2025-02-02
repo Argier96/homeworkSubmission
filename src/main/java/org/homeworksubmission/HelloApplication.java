@@ -1,4 +1,4 @@
-package org.homeworksubmission.homeworksubmission;
+package org.homeworksubmission;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
