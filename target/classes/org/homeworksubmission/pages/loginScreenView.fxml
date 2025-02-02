@@ -44,13 +44,13 @@
                 <Font name="AppleGothic Regular" size="24.0" />
             </font>
         </Label>
-        <PasswordField layoutX="156.0" layoutY="212.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" styleClass="underline-inputs" stylesheets="@../../../../java/org/homeworksubmission/style.css">
+        <PasswordField fx:id="passwordInput" layoutX="156.0" layoutY="212.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" styleClass="underline-inputs" stylesheets="@style.css">
             <font>
                 <Font name="AppleGothic Regular" size="13.0" />
             </font>
         </PasswordField>
-        <TextField layoutX="156.0" layoutY="141.0" maxWidth="275.0" prefHeight="27.0" prefWidth="275.0" promptText="Username" styleClass="underline-inputs" stylesheets="@../../../../java/org/homeworksubmission/style.css" />
-        <Button layoutX="313.0" layoutY="260.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: deepskyblue; -fx-underline: true; -fx-cursor: hand;" text="forgot password">
+        <TextField fx:id="userNameInput" layoutX="156.0" layoutY="141.0" maxWidth="275.0" prefHeight="27.0" prefWidth="275.0" promptText="Username" styleClass="underline-inputs" stylesheets="@style.css" />
+        <Button layoutX="313.0" layoutY="256.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: deepskyblue; -fx-underline: true; -fx-cursor: hand;" text="forgot password" onAction="#onForgetButtonClick">
             <effect>
                 <Blend />
             </effect>
@@ -58,7 +58,7 @@
                 <Font name="AppleGothic Regular" size="13.0" />
             </font>
         </Button>
-        <Button id="loginBtn" layoutX="201.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="171.0" style="-fx-background-radius: 30; -fx-background-color: DeepSkyBlue; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20; -fx-font-weight: bold;" text="Login" >
+        <Button id="loginBtn" layoutX="201.0" layoutY="282.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="40.0" prefWidth="171.0" style="-fx-background-radius: 30; -fx-background-color: DeepSkyBlue; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 20; -fx-font-weight: bold;" text="Login">
             <effect>
                 <Blend />
             </effect>

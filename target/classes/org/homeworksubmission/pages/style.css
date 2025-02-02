@@ -1,4 +1,4 @@
-/* PasswordField with only an underline */
+/* PasswordField &inputField with only an underline and no borders */
 .underline-inputs {
     -fx-background-color: transparent;
     -fx-border-color: transparent transparent deepskyblue; /* Bottom border only */
@@ -7,4 +7,13 @@
     -fx-faint-focus-color: transparent;
     -fx-padding: 5 0 3 0;
     -fx-prompt-text-fill: black;
+}
+
+.forgot-button{
+    -fx-text-fill: white;
+    -fx-border-color: deepskyblue;
+    -fx-background-color: deepskyblue;
+    -fx-border-radius: 10;
+    -fx-padding: 3 6 6 6;
+
 }

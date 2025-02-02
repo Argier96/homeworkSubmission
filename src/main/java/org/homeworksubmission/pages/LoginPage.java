@@ -15,6 +15,8 @@ public class LoginPage extends Application {
         stage.setTitle("Homework Submission");
         stage.setScene(scene);
         stage.show();
+
+
     }
 
     public static void main(String[] args) {
