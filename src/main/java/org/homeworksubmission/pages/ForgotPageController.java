@@ -26,8 +26,10 @@ public class ForgotPageController {
             Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            //move back to login page
+            //move back to login page after closing current window
             Stage stage = new Stage();
+            Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+            currentStage.close();
             Scene scene = null ;
             FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("loginScreenView.fxml"));
             scene = new Scene(fxmlLoader.load(), 600, 400);
