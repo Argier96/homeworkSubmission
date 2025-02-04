@@ -18,7 +18,7 @@ public class ForgotPageController {
     public TextField userNameInput;
 
     @FXML
-    public void onforgetBtnClicked() throws IOException {
+    public void onForgetBtnClicked() throws IOException {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Forgot Password");
             alert.setHeaderText(null);
