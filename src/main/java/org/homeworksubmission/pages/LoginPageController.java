@@ -11,6 +11,8 @@ import javafx.util.Duration;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+import static org.homeworksubmission.database.userDatabase.checkLogin;
+
 
 public class LoginPageController {
     @FXML
@@ -32,7 +34,7 @@ public class LoginPageController {
                 alert.close();});
             delay.play();
         }else {
-            alert.setHeaderText("Login Successful");
+            alert.setHeaderText(checkLogin(userNameInput.getText(), passwordInput.getText()));
             alert.show();
             //alert is closed after 5 seconds
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
