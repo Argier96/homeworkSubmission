@@ -1,14 +1,11 @@
 package org.homeworksubmission.database;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.mindrot.jbcrypt.BCrypt;
-
-
-import static java.sql.DriverManager.getConnection;
 
 public class userDatabase {
     //loading database information from .env for security
@@ -16,6 +13,8 @@ public class userDatabase {
     static String dbUrl = dotenv.get("DATABASE_URL");
     static String dbUser = dotenv.get("DATABASE_USERNAME");
     static String dbPassword = dotenv.get("DATABASE_PASSWORD");
+
+
 
     // Method to add a user to the database
     public static boolean addUser(String username, String password, String email, String role) {
@@ -68,8 +67,7 @@ public class userDatabase {
         return users;
         }
     public static String checkLogin(String userName, String password) {
-        System.out.println("Getting user: " + userName);
-        String sql = "SELECT * FROM User WHERE username = ?"; // SQL query to get user by username
+        String sql = "SELECT * FROM user WHERE username = ?"; // SQL query to get user by username
 
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -81,15 +79,16 @@ public class userDatabase {
                     // Retrieve the user details from the database
                     String storedHash = rs.getString("password"); // The hashed password stored in DB
                     String username = rs.getString("username");
+                    String passwordHash = rs.getString("password");
                     String email = rs.getString("email");
                     String role = rs.getString("role");
 
                     // Check if the entered password matches the stored hash
                     boolean isMatch = BCrypt.checkpw(password, storedHash);
                     if (isMatch) {
-                        return "User Found: " + username + " | Email: " + email + " | Role: " + role;
+                        return role;
                     } else {
-                        return "Incorrect password for user: " + username;
+                        return "Incorrect username or password " ;
                     }
                 } else {
                     return "User not found"; // If no user was found in the DB
@@ -103,11 +102,6 @@ public class userDatabase {
     }
         public static void main(String[] args) {
 
-        // addUser("admin", "admin122", "admin@admin.fi", "admin");
-        List<user> users = getUsers();
-        for (user user : users) {
-            System.out.println(user);
-        }
         }
 
     }
