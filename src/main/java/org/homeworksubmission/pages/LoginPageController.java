@@ -27,12 +27,13 @@ public class LoginPageController {
         alert.setTitle("Login");
         if (userNameInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
             alert.setHeaderText("Username and Password are Required");
-            alert.show();
+            userNameInput.setText("");
+            passwordInput.setText("");
+            alert.showAndWait();
             //alert is closed after 5 seconds
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
             delay.setOnFinished(event -> {
-                userNameInput.setText("");
-                passwordInput.setText("");
+
                 });
             alert.close();
             delay.play();
@@ -97,8 +98,6 @@ public class LoginPageController {
                     alert.show();
                 }
             }
-
-
             userNameInput.setText("");
             passwordInput.setText("");
         }

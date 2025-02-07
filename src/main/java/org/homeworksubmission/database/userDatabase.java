@@ -50,7 +50,7 @@ public class userDatabase {
                 Connection connection = DriverManager.getConnection(dbUrl,dbUser,dbPassword);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query)){
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 user user = new user(
                         resultSet.getString("username"),
                         resultSet.getString("password"),
@@ -110,6 +110,10 @@ public class userDatabase {
 
     }
         public static void main(String[] args) {
+            for (user user : getUsers()) {
+                System.out.println(user);
+
+            }
 
         }
 
