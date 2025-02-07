@@ -10,7 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
 import javafx.stage.Stage;
-import org.homeworksubmission.database.user;
 
 import java.io.IOException;
 
@@ -43,12 +42,13 @@ public class LoginPageController {
 
             //jump to new scene based on roles
             Stage stage = new Stage();
-            //close current window & open new window
-            Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-            currentStage.close();
-            Scene scene = null ;
+
             switch (User) {
                 case "student" -> {
+                    //close current window & open new window
+                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+                    currentStage.close();
+                    Scene scene = null ;
                     FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("studentPage.fxml"));
                     try {
                         scene = new Scene(fxmlLoader.load(), 1000, 1000);
@@ -58,8 +58,13 @@ public class LoginPageController {
                     stage.setTitle(User);
                     stage.setScene(scene);
                     stage.show();
+                    break;
                 }
                 case "teacher" -> {
+                    //close current window & open new window
+                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+                    currentStage.close();
+                    Scene scene = null ;
                     FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("teacherPage.fxml"));
                     try {
                         scene = new Scene(fxmlLoader.load(), 1000, 1000);
@@ -69,9 +74,13 @@ public class LoginPageController {
                     stage.setTitle(User);
                     stage.setScene(scene);
                     stage.show();
-
+                    break;
                 }
                 case "admin" -> {
+                    //close current window & open new window
+                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+                    currentStage.close();
+                    Scene scene = null ;
                     FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("adminPage.fxml"));
                     try {
                         scene = new Scene(fxmlLoader.load(), 1000, 1000);
@@ -81,7 +90,7 @@ public class LoginPageController {
                     stage.setTitle(User);
                     stage.setScene(scene);
                     stage.show();
-
+                    break;
                 }
                 default -> {
                     alert.setHeaderText("Username or password incorrect");

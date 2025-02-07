@@ -17,8 +17,8 @@ public class userDatabase {
 
 
     // Method to add a user to the database
-    public static boolean addUser(String username, String password, String email, String role) {
-        String sql = "INSERT INTO User (username, password, email, role) VALUES (?, ?, ?, ?)";
+    public static boolean addUser(String username, String password, String email, int role) {
+        String sql = "INSERT INTO users (username, password, email, role_id) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -29,7 +29,7 @@ public class userDatabase {
             stmt.setString(1, username);
             stmt.setString(2, hashedPassword); // hashing the password for security
             stmt.setString(3, email);
-            stmt.setString(4, role);
+            stmt.setInt(4, role);
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -44,7 +44,7 @@ public class userDatabase {
 
 
     public static List<user> getUsers() {
-        String query = "SELECT * FROM User";
+        String query = "SELECT * FROM users";
         List<user> users = new ArrayList<>();
         try(
                 Connection connection = DriverManager.getConnection(dbUrl,dbUser,dbPassword);
@@ -55,7 +55,7 @@ public class userDatabase {
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("email"),
-                        resultSet.getString("role")
+                        resultSet.getInt("role_id")
                 );
                 users.add(user);
             }
@@ -67,7 +67,7 @@ public class userDatabase {
         return users;
         }
     public static String checkLogin(String userName, String password) {
-        String sql = "SELECT * FROM user WHERE username = ?"; // SQL query to get user by username
+        String sql = "SELECT * FROM users WHERE username = ?"; // SQL query to get user by username
 
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -81,7 +81,16 @@ public class userDatabase {
                     String username = rs.getString("username");
                     String passwordHash = rs.getString("password");
                     String email = rs.getString("email");
-                    String role = rs.getString("role");
+                    int roleInt = rs.getInt("role_id");
+                    String role = "";
+                    switch (roleInt) {
+                        case 1:   role ="admin";
+                        break;
+                        case 2:   role ="teacher";
+                        break;
+                        case 3:   role ="student";
+                        break;
+                    }
 
                     // Check if the entered password matches the stored hash
                     boolean isMatch = BCrypt.checkpw(password, storedHash);
