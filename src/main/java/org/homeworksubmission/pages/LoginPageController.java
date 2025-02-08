@@ -114,7 +114,7 @@ public class LoginPageController {
         Scene scene = null ;
         FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("forgotPasswordView.fxml"));
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), 640, 400);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

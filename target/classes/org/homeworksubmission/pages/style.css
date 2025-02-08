@@ -6,7 +6,8 @@
     -fx-focus-color: blue;         /* Blue underline on focus */
     -fx-faint-focus-color: transparent;
     -fx-padding: 5 0 3 0;
-    -fx-prompt-text-fill: black;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
 }
 
 .forgot-button{

@@ -15,29 +15,14 @@ import java.util.Optional;
 public class ForgotPageController {
     @FXML
     public Button forgotBtn;
-    public TextField userNameInput;
+    public TextField emailInput;
 
     @FXML
     public void onForgetBtnClicked() throws IOException {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Forgot Password");
-            alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to reset your password?");
-            Optional<ButtonType> result = alert.showAndWait();
+        String email = emailInput.getText();
+    }
 
-        if (result.get() == ButtonType.OK) {
-            //move back to login page after closing current window
-            Stage stage = new Stage();
-            Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-            currentStage.close();
-            Scene scene = null ;
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("loginScreenView.fxml"));
-            scene = new Scene(fxmlLoader.load(), 600, 400);
-            stage.setTitle("Forgot Password");
-            stage.setScene(scene);
-            stage.show();
-            }else {
-                System.out.println("Password reset cancelled");
-            }
+    public void sendEmail(String email) {
+
     }
 }
