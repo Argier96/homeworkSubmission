@@ -12,6 +12,12 @@
     <TableView fx:id="userTableView" style="-fx-border-width: 0; -fx-background-insets: 0; -fx-background-color: #ffffff; -fx-padding: 10px; -fx-effect: dropshadow(gaussian, #ffffff, 10, 0.5, 0, 2);" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
 
         <columns>
+            <!-- First name Column -->
+            <TableColumn fx:id="firstNameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="First Name" />
+
+            <!-- last name Column -->
+            <TableColumn fx:id="lastNameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Last Name" />
+
             <!-- Username Column -->
             <TableColumn fx:id="usernameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Username" />
 
