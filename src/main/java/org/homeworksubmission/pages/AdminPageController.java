@@ -2,20 +2,26 @@ package org.homeworksubmission.pages;
 
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.homeworksubmission.database.user;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.homeworksubmission.database.userDatabase;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdminPageController {
     @FXML
     public TableRow tableRow;
     public Button addUserButton;
+    public Button signOutButton;
 
     @FXML
     private TableView<user> userTableView;
@@ -241,4 +247,23 @@ public class AdminPageController {
     }
 
 
+    public void onSignOutButtonClicked() {
+        System.out.println("Sign Out Button clicked");
+        Stage stage = new Stage();
+
+        //close current window & open new window
+        Stage currentStage = (Stage) signOutButton.getScene().getWindow();
+        currentStage.close();
+
+        Scene scene = null ;
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("loginScreenView.fxml"));
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Forgot Password");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

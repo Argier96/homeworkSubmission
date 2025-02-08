@@ -10,40 +10,26 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.homeworksubmission.pages.AdminPageController">
     <TableView fx:id="userTableView" style="-fx-border-width: 0; -fx-background-insets: 0; -fx-background-color: #ffffff; -fx-padding: 10px; -fx-effect: dropshadow(gaussian, #ffffff, 10, 0.5, 0, 2);" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
-
         <columns>
-            <!-- First name Column -->
             <TableColumn fx:id="firstNameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="First Name" />
-
-            <!-- last name Column -->
             <TableColumn fx:id="lastNameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Last Name" />
-
-            <!-- Username Column -->
             <TableColumn fx:id="usernameColumn" prefWidth="187.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Username" />
-
-            <!-- Email Column -->
             <TableColumn fx:id="emailColumn" prefWidth="176.0" style="-fx-alignment: center-left; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Email" />
-
-            <!-- Role Column -->
             <TableColumn fx:id="roleColumn" prefWidth="116.0" style="-fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Role" />
-
-            <!-- Action Column -->
             <TableColumn fx:id="actionColumn" prefWidth="121.0" style="-fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #333; -fx-padding: 10px;" text="Action" />
         </columns>
 
-        <!-- Table Row Styling -->
         <TableRow fx:id="tableRow" style="-fx-padding: 10 0 10 0; -fx-background-color: #ffffff; -fx-border-color: #ffffff; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #ffffff, 5, 0.3, 0, 2);">
-            <!-- Custom table cell style (removes borders) -->
             <TableCell style="-fx-background-color: #ffffff;-fx-border-width: 0;" />
         </TableRow>
 
-        <!-- Row hover effect -->
-        <TableRow style="-fx-background-color: transparent;">
-            <TableCell style="-fx-border-width: 0;" />
-        </TableRow>
     </TableView>
 
+    <!-- Add User Button with proper positioning -->
+    <Button fx:id="addUserButton" layoutX="520.0" layoutY="20.0" onAction="#onUserAddButtonClicked" prefHeight="38.0" prefWidth="138.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: deepskyblue; -fx-text-fill: white; -fx-padding: 10 20 10 20; -fx-background-radius: 5;" text="Add User" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="20.0" />
 
-    <Button fx:id="addUserButton" onAction="#onUserAddButtonClicked" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: deepskyblue; -fx-text-fill: white; -fx-padding: 10 20 10 20; -fx-border-radius: 5; -fx-background-radius: 5;" text="Add User" AnchorPane.leftAnchor="600" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="20" />
-    <Text fill="DEEPSKYBLUE" style="-fx-font-size: 40px; -fx-font-weight: bold; " text="User list" AnchorPane.leftAnchor="100" AnchorPane.topAnchor="20" />
+    <!-- Sign Out Button with adjusted layoutX -->
+    <Button fx:id="signOutButton" layoutX="700.0" onAction="#onSignOutButtonClicked" prefHeight="38.0" prefWidth="138.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: deepskyblue; -fx-text-fill: white; -fx-padding: 10 20 10 20; -fx-background-radius: 5;" text="Sign Out" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="20.0" />
+
+    <Text fill="DEEPSKYBLUE" layoutX="88.0" layoutY="53.0" style="-fx-font-size: 40px; -fx-font-weight: bold;" text="User list" wrappingWidth="154.55078125" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="14.0" />
 </AnchorPane>
