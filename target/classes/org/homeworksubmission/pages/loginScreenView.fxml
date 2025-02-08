@@ -52,7 +52,7 @@
             </font>
         </PasswordField>
         <TextField fx:id="userNameInput" layoutX="364.0" layoutY="138.0" maxWidth="275.0" prefHeight="28.0" prefWidth="232.0" promptText="Username" styleClass="underline-inputs" stylesheets="@style.css" />
-        <Button layoutX="478.0" layoutY="251.0" mnemonicParsing="false" onAction="#onForgetButtonClick" prefHeight="15.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: deepskyblue; -fx-underline: true; -fx-cursor: hand;" text="forgot password">
+        <Button layoutX="478.0" layoutY="251.0" mnemonicParsing="false" onAction="#onForgetButtonClick" prefHeight="15.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: #FFA500; -fx-underline: true; -fx-cursor: hand;" text="forgot password">
             <effect>
                 <Blend />
             </effect>

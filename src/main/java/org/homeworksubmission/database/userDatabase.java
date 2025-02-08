@@ -16,6 +16,22 @@ public class userDatabase {
     static String dbPassword = dotenv.get("DATABASE_PASSWORD");
 
 
+    //check if user exists or not
+    public static boolean userExists(String username) {
+        String sql = "SELECT * FROM users WHERE username = ? or email =? ";
+        try(Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, username);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+
+        }
+        catch (SQLException e) {
+           return false;
+        }
+
+    }
 
     // Method to add a user to the database
     public static boolean addUser(String firstName, String lastName,String username, String password, String email, int role) {
@@ -154,6 +170,7 @@ public class userDatabase {
         }
 
     }
+
         public static void main(String[] args) {
             for (user user : getUsers()) {
                 System.out.println(user);
