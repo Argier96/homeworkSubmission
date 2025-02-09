@@ -1,157 +1,126 @@
 package org.homeworksubmission.pages;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import org.homeworksubmission.database.*;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.util.Duration;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.homeworksubmission.database.userDatabase;
 
 import java.io.IOException;
 
 import static org.homeworksubmission.database.userDatabase.checkLogin;
 import static org.homeworksubmission.database.userDatabase.userExists;
 
-
 public class LoginPageController {
+
     @FXML
     public TextField userNameInput;
+    @FXML
     public PasswordField passwordInput;
 
     @FXML
     protected void onLoginButtonClick() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Login");
+
+        // Validate input fields
         if (userNameInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
-            alert.setHeaderText("Username and Password are Required");
-            userNameInput.setText("");
-            passwordInput.setText("");
-            alert.showAndWait();
-            //alert is closed after 5 seconds
-            PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished(event -> {
-
-                });
-            alert.close();
-            delay.play();
-
-        }else {
-            String User = checkLogin(userNameInput.getText(),passwordInput.getText());
-
-            //jump to new scene based on roles
-            Stage stage = new Stage();
-
-            switch (User) {
-                case "student" -> {
-                    //close current window & open new window
-                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-                    currentStage.close();
-                    Scene scene = null ;
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("studentPage.fxml"));
-                    try {
-                        scene = new Scene(fxmlLoader.load(), 1000, 1000);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    stage.setTitle(User);
-                    stage.setScene(scene);
-                    stage.show();
-                    break;
-                }
-                case "teacher" -> {
-                    //close current window & open new window
-                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-                    currentStage.close();
-                    Scene scene = null ;
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("teacherPage.fxml"));
-                    try {
-                        scene = new Scene(fxmlLoader.load(), 1000, 1000);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    stage.setTitle(User);
-                    stage.setScene(scene);
-                    stage.show();
-                    break;
-                }
-                case "admin" -> {
-                    //close current window & open new window
-                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-                    currentStage.close();
-                    Scene scene = null ;
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("adminPage.fxml"));
-                    try {
-                        scene = new Scene(fxmlLoader.load(), 1000, 1000);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    stage.setTitle(User);
-                    stage.setScene(scene);
-                    stage.show();
-                    break;
-                }
-                default -> {
-                    alert.setHeaderText("Username or password incorrect");
-                    alert.show();
-                }
-            }
-            userNameInput.setText("");
-            passwordInput.setText("");
+            showAlert(alert, "Username and Password are Required");
+            clearInputFields();
+            return;
         }
+
+        // Check user credentials
+        String userRole = checkLogin(userNameInput.getText(), passwordInput.getText());
+
+        // Redirect based on user role
+        switch (userRole) {
+            case "student" -> redirectToPage("studentPage.fxml", "Student Dashboard");
+            case "teacher" -> redirectToPage("teacherPage.fxml", "Teacher Dashboard");
+            case "admin" -> redirectToPage("adminPage.fxml", "Admin Dashboard");
+            default -> showAlert(alert, "Username or password incorrect");
+        }
+
+        clearInputFields();
     }
 
+    @FXML
     public void onForgetButtonClick() {
-        // first, a dialog appears, and only when the correct username or email is entered, goes to reset the password
+        // Create a dialog for password reset
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Forgot Password??");
+        dialog.setTitle("Forgot Password?");
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
-        TextField userNameInput = new TextField();
-        userNameInput.setPrefWidth(300);
-        userNameInput.setPromptText("Enter your username or email");
+
+        TextField userNameOrEmailInput = new TextField();
+        userNameOrEmailInput.setPrefWidth(300);
+        userNameOrEmailInput.setPromptText("Enter your username or email");
 
         GridPane grid = new GridPane();
-        // setting gridPane size
         grid.setPrefHeight(50);
         grid.setPrefWidth(500);
         grid.setHgap(20);
         grid.setVgap(20);
-        grid.add(new Label("Enter Username or email:"), 0, 0);
-        grid.add(userNameInput, 1, 0);
+        grid.add(new Label("Enter Username or Email:"), 0, 0);
+        grid.add(userNameOrEmailInput, 1, 0);
         dialog.getDialogPane().setContent(grid);
 
         dialog.showAndWait();
 
+        // Handle dialog result
         if (dialog.getResult() == ButtonType.OK) {
-            if (userNameInput.getText().isEmpty()) {
+            if (userNameOrEmailInput.getText().isEmpty()) {
                 dialog.setTitle("Username or email is Required!!!");
                 dialog.showAndWait();
-            } else {
-                if (userExists(userNameInput.getText())) {
-                    Stage stage = new Stage();
-
-                    // Create the new scene after the dialog is closed and check if the input is valid
-                    Scene scene = null;
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("resetPasswordView.fxml"));
-                    try {
-                        scene = new Scene(fxmlLoader.load(), 640, 400);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    stage.setTitle("Forgot Password");
-                    stage.setScene(scene);
-                    stage.show();
-
-                    // Close the current stage (Login Page) after opening the new one
-                    Stage currentStage = (Stage) userNameInput.getScene().getWindow();
-                    if (currentStage != null) {
-                        currentStage.close();
-                    }
-                }
+            } else if (userExists(userNameOrEmailInput.getText())) {
+                redirectToPage("resetPasswordView.fxml", "Reset Password");
+                closeCurrentStage();
             }
         }
     }
 
+    // Helper method to show alerts
+    private void showAlert(Alert alert, String message) {
+        alert.setHeaderText(message);
+        alert.show();
+
+        // Close alert after 5 seconds
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished(event -> alert.close());
+        delay.play();
+    }
+
+    // Helper method to clear input fields
+    private void clearInputFields() {
+        userNameInput.clear();
+        passwordInput.clear();
+    }
+
+    // Helper method to redirect to a new page
+    private void redirectToPage(String fxmlFile, String title) {
+        try {
+            Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+            currentStage.close();
+
+            Stage newStage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource(fxmlFile));
+            Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
+            newStage.setTitle(title);
+            newStage.setScene(scene);
+            newStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load FXML file: " + fxmlFile, e);
+        }
+    }
+
+    // Helper method to close the current stage
+    private void closeCurrentStage() {
+        Stage currentStage = (Stage) userNameInput.getScene().getWindow();
+        if (currentStage != null) {
+            currentStage.close();
+        }
+    }
 }
