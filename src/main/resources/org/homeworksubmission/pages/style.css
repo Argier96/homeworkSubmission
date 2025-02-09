@@ -18,34 +18,26 @@
     -fx-padding: 3 6 6 6;
 
 }
-
-/* styles.css */
-.dialog-pane {
-    -fx-background-radius: 20; /* Rounded corners */
-    -fx-border-radius: 20;     /* Rounded corners for the border */
-    -fx-border-width: 2;       /* Border width */
-    -fx-border-color: #333;    /* Border color */
-    -fx-background-color: #f0f0f0; /* Background color */
+.alert{
+    -fx-background-color: white;
+    -fx-text-fill: #495057;
 }
 
-.dialog-pane .header-panel {
-    -fx-background-radius: 20 20 0 0; /* Rounded corners for the header */
-    -fx-background-color: #4CAF50;    /* Header background color */
+/* Style the header label inside the alert */
+.alert .header-label {
+    -fx-font-size: 18px;           /* Larger font size for the header */
+    -fx-text-fill: #007bff;        /* Blue color for the header text */
 }
 
-.dialog-pane .content {
-    -fx-font-size: 14px;
-    -fx-text-fill: white; /* Text color */
-    -fx-background-color: deepskyblue;
+.alert .button{
+    -fx-background-color: #007bff; /* Blue background for the OK button */
+    -fx-text-fill: white;           /* White text */
+    -fx-font-size: 14px;            /* Button font size */
+    -fx-padding: 8px 15px;          /* Padding for the button */
+    -fx-background-radius: 5px;     /* Rounded corners for the button */
 
 }
-
-.dialog-pane .button-bar .button {
-    -fx-background-radius: 10; /* Rounded corners for buttons */
-    -fx-background-color: deepskyblue; /* Button background color */
-    -fx-text-fill: white; /* Button text color */
-}
-
-.dialog-pane .button-bar .button:hover {
-    -fx-background-color: #45a049; /* Button hover color */
+/* Button hover effect */
+.alert .button:hover {
+    -fx-background-color: #0056b3; /* Darker blue when hovered */
 }

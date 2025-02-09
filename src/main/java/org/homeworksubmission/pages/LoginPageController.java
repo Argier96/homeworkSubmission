@@ -5,16 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import org.homeworksubmission.database.userDatabase;
-
-import javax.swing.text.html.ImageView;
 import java.io.IOException;
-
 import static org.homeworksubmission.database.userDatabase.checkLogin;
 import static org.homeworksubmission.database.userDatabase.userExists;
 
@@ -34,8 +30,9 @@ public class LoginPageController {
 
     @FXML
     protected void onLoginButtonClick() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Login");
+        alert.setHeaderText("Error");
 
         // Validate input fields
         if (userNameInput.getText().isEmpty() || passwordInput.getText().isEmpty()) {
@@ -65,16 +62,17 @@ public class LoginPageController {
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
 
         TextField userNameOrEmailInput = new TextField();
-        //styling userNameorEmailInput
+        //styling userName or EmailInput
         userNameOrEmailInput.setStyle(
-                "-fx-background-color: transparent;"+
-        "-fx-border-color: transparent transparent deepskyblue;"+
-        "-fx-border-width: 0 0 2px 0;" +
-        "-fx-focus-color: blue;"+
-        "-fx-faint-focus-color: transparent;"+
-        "-fx-padding: 5 0 3 0;"+
-        "-fx-prompt-text-fill: gray;"+
-        "-fx-text-fill: black;"
+            "-fx-background-color: transparent;"+
+            "-fx-border-width: 0 0 2px 0;" +
+            "-fx-focus-color: blue;"+
+            "-fx-faint-focus-color: transparent;"+
+            "-fx-padding: 5 0 3 0;"+
+            "-fx-prompt-text-fill: gray;"+
+            "-fx-text-fill: black;"+
+            " -fx-border-color: transparent transparent deepskyblue;"
+
         );
 
         userNameOrEmailInput.setPrefWidth(300);
@@ -85,11 +83,32 @@ public class LoginPageController {
         grid.setPrefWidth(500);
         grid.setHgap(20);
         grid.setVgap(20);
-        grid.add(new Label("Enter Username or Email:"), 0, 0);
+        grid.setStyle("-fx-background-color: #ffffff;");
+        grid.add(new Label("Enter Username or Email:  "), 0, 0);
         grid.add(userNameOrEmailInput, 1, 0);
-        dialog.getDialogPane().getStylesheets().add(LoginPageController.class.getResource("style.css").toExternalForm());
-
+        dialog.initStyle(StageStyle.UTILITY);
+        dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.getDialogPane().setContent(grid);
+        dialog.setTitle("Forget Password");
+// Style the dialog buttons
+        Button okButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        Button cancelButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+
+        okButton.setStyle(
+                "-fx-background-color: deepskyblue;" + // blue background
+                        "-fx-text-fill: white;" +           // white text
+                        "-fx-font-size: 14px;" +            // font size
+                        "-fx-padding: 8px 15px;" +          // padding for better button feel
+                        "-fx-background-radius: 5px;"       // rounded button corners
+        );
+        cancelButton.setStyle(
+                "-fx-background-color: #f8f9fa;" +  // light background
+                        "-fx-text-fill: #495057;" +          // dark text color
+                        "-fx-font-size: 14px;" +             // font size
+                        "-fx-padding: 8px 15px;" +           // padding for better button feel
+                        "-fx-border-radius: 5px;"            // rounded button corners
+        );
+
 
         dialog.showAndWait();
 
@@ -107,8 +126,7 @@ public class LoginPageController {
 
     // Helper method to show alerts
     private void showAlert(Alert alert, String message) {
-        alert.setHeaderText(message);
-        alert.getDialogPane().getStylesheets().add(LoginPageController.class.getResource("style.css").toExternalForm());
+        alert.setContentText(message);
         alert.show();
 
         // Close alert after 5 seconds
