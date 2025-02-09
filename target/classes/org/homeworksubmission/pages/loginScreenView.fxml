@@ -71,10 +71,17 @@
                 <Font name="AppleGothic Regular" size="18.0" />
             </font>
         </Label>
-      <ImageView fitHeight="285.0" fitWidth="205.0" layoutX="69.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-         <image>
+        <ImageView fitHeight="285.0" fitWidth="205.0" layoutX="69.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../app_logo.jpg" />
-         </image>
-      </ImageView>
+        </ImageView>
+        <Button layoutX="589.0" layoutY="37.0" onAction="#closeApplication" style="-fx-background-color: #4169E1;" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <graphic>
+                <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../exit_icon.png" />
+                </ImageView>
+         </graphic>
+
+        </Button>
+
     </AnchorPane>
 </VBox>

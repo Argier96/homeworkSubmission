@@ -19,3 +19,33 @@
 
 }
 
+/* styles.css */
+.dialog-pane {
+    -fx-background-radius: 20; /* Rounded corners */
+    -fx-border-radius: 20;     /* Rounded corners for the border */
+    -fx-border-width: 2;       /* Border width */
+    -fx-border-color: #333;    /* Border color */
+    -fx-background-color: #f0f0f0; /* Background color */
+}
+
+.dialog-pane .header-panel {
+    -fx-background-radius: 20 20 0 0; /* Rounded corners for the header */
+    -fx-background-color: #4CAF50;    /* Header background color */
+}
+
+.dialog-pane .content {
+    -fx-font-size: 14px;
+    -fx-text-fill: white; /* Text color */
+    -fx-background-color: deepskyblue;
+
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-radius: 10; /* Rounded corners for buttons */
+    -fx-background-color: deepskyblue; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #45a049; /* Button hover color */
+}

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.homeworksubmission.database.user;
 import org.homeworksubmission.database.userDatabase;
 
@@ -164,6 +165,8 @@ public class AdminPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("loginScreenView.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setTitle("Login");
+            // Remove window decorations (minimize, maximize, close buttons)
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

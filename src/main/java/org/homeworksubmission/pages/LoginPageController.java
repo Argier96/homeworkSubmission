@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.homeworksubmission.database.userDatabase;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 import static org.homeworksubmission.database.userDatabase.checkLogin;
@@ -21,6 +24,13 @@ public class LoginPageController {
     public TextField userNameInput;
     @FXML
     public PasswordField passwordInput;
+
+    //close application
+    @FXML
+    protected void closeApplication() {
+        closeCurrentStage();
+    }
+
 
     @FXML
     protected void onLoginButtonClick() {
@@ -52,10 +62,21 @@ public class LoginPageController {
     public void onForgetButtonClick() {
         // Create a dialog for password reset
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Forgot Password?");
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
 
         TextField userNameOrEmailInput = new TextField();
+        //styling userNameorEmailInput
+        userNameOrEmailInput.setStyle(
+                "-fx-background-color: transparent;"+
+        "-fx-border-color: transparent transparent deepskyblue;"+
+        "-fx-border-width: 0 0 2px 0;" +
+        "-fx-focus-color: blue;"+
+        "-fx-faint-focus-color: transparent;"+
+        "-fx-padding: 5 0 3 0;"+
+        "-fx-prompt-text-fill: gray;"+
+        "-fx-text-fill: black;"
+        );
+
         userNameOrEmailInput.setPrefWidth(300);
         userNameOrEmailInput.setPromptText("Enter your username or email");
 
@@ -66,6 +87,8 @@ public class LoginPageController {
         grid.setVgap(20);
         grid.add(new Label("Enter Username or Email:"), 0, 0);
         grid.add(userNameOrEmailInput, 1, 0);
+        dialog.getDialogPane().getStylesheets().add(LoginPageController.class.getResource("style.css").toExternalForm());
+
         dialog.getDialogPane().setContent(grid);
 
         dialog.showAndWait();
@@ -85,6 +108,7 @@ public class LoginPageController {
     // Helper method to show alerts
     private void showAlert(Alert alert, String message) {
         alert.setHeaderText(message);
+        alert.getDialogPane().getStylesheets().add(LoginPageController.class.getResource("style.css").toExternalForm());
         alert.show();
 
         // Close alert after 5 seconds
@@ -109,6 +133,8 @@ public class LoginPageController {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource(fxmlFile));
             Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
             newStage.setTitle(title);
+            // Remove window decorations (minimize, maximize, close buttons)
+            newStage.initStyle(StageStyle.UNDECORATED);
             newStage.setScene(scene);
             newStage.show();
         } catch (IOException e) {
@@ -123,4 +149,6 @@ public class LoginPageController {
             currentStage.close();
         }
     }
+
+
 }
