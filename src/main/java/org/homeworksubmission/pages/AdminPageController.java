@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -38,6 +39,9 @@ public class AdminPageController {
     @FXML
     public Button signOutButton;
 
+    // Define a custom button type for "Delete"
+    private static final ButtonType DELETE_BUTTON = new ButtonType("Delete", ButtonBar.ButtonData.LEFT);
+
     @FXML
     public void initialize() {
         // Bind columns to user properties
@@ -63,6 +67,20 @@ public class AdminPageController {
                     setGraphic(empty ? null : editButton);
                 }
             };
+        });
+
+        userTableView.setRowFactory(tv -> {
+            TableRow<user> row = new TableRow<>();
+
+            // Listen to selection changes
+            row.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    row.setStyle("-fx-border-color: blue; -fx-background-color: blue");  // Set the background color when selected
+                } else {
+                    row.setStyle("");  // Reset to default when deselected
+                }
+            });
+            return row;
         });
 
         // Load data into the table
@@ -93,7 +111,9 @@ public class AdminPageController {
     private Dialog<ButtonType> createUserDialog(String title, user selectedUser) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle(title);
-        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+        // Add the "Delete" button to the dialog
+        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL, DELETE_BUTTON);
 
         // Create input fields
         TextField firstNameInput = new TextField(selectedUser != null ? selectedUser.getFirstName() : "");
@@ -138,39 +158,64 @@ public class AdminPageController {
                 int roleValue = "Teacher".equals(role) ? 2 : 3; // Convert role to numeric value
 
                 if (selectedUser == null) {
-                    // Add new user
-                    userDatabase.addUser(firstName, lastName, username, password, email, roleValue);
+                    if(!firstName.isEmpty() && !lastName.isEmpty() && !username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                        // Add new user
+                        userDatabase.addUser(firstName, lastName, username, password, email, roleValue);
+                    }else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error!!");
+                        alert.setContentText("Required Fields are empty");
+                        alert.showAndWait();
+                    }
+
                 } else {
                     // Update existing user
                     userDatabase.updateUser(selectedUser.getUserName(), firstName, lastName, username,
                             password.isEmpty() ? null : password, email, roleValue);
                 }
+                loadData();
+            } else if (dialogButton == DELETE_BUTTON) {
+                if (selectedUser != null) {
+                    // Delete the user
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete User");
+                    if (selectedUser.getUserName() != null) {
+                        if(userDatabase.deleteUser(selectedUser.getUserName())) {
+                            alert.setHeaderText("User deleted");
+                            alert.showAndWait();
+                            loadData();
+                        }
 
-                loadData(); // Refresh the table
+                    }
+
+                    loadData();
+                }
             }
             return null;
         });
-
         return dialog;
     }
 
     // Handle "Sign Out" button click
     @FXML
-    public void onSignOutButtonClicked() {
+    private void onSignOutButtonClicked() throws IOException {
+        // Get the current stage (window)
         Stage currentStage = (Stage) signOutButton.getScene().getWindow();
-        currentStage.close();
 
-        try {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("loginScreenView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-            stage.setTitle("Login");
-            // Remove window decorations (minimize, maximize, close buttons)
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load login screen", e);
-        }
+        // Load the login screen FXML
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginScreenView.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // Create a new scene for the login screen
+        Scene loginScene = new Scene(root, 640, 400);
+        Stage loginStage = new Stage();
+        loginStage.setTitle("Homework Submission");
+
+        loginStage.initStyle(StageStyle.UNDECORATED);
+        loginStage.setScene(loginScene);
+        loginStage.show();
+        currentStage.close();
     }
+
 }

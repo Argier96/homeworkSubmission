@@ -149,7 +149,7 @@ public class LoginPageController {
 
             Stage newStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource(fxmlFile));
-            Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
+            Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
             newStage.setTitle(title);
             // Remove window decorations (minimize, maximize, close buttons)
             newStage.initStyle(StageStyle.UNDECORATED);

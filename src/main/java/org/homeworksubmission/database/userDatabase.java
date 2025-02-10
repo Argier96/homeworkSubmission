@@ -15,6 +15,24 @@ public class userDatabase {
     static String dbUser = dotenv.get("DATABASE_USERNAME");
     static String dbPassword = dotenv.get("DATABASE_PASSWORD");
 
+    //delete user from database
+    public static boolean deleteUser(String username) {
+        String sql = "DELETE FROM users WHERE username = ?";
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+
+            // executeUpdate returns the number of rows affected, so we check if it's > 0
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Optionally log the exception
+            return false;
+        }
+    }
+
 
     //check if user exists or not
     public static boolean userExists(String username) {
@@ -172,10 +190,6 @@ public class userDatabase {
     }
 
         public static void main(String[] args) {
-            for (user user : getUsers()) {
-                System.out.println(user);
-
-            }
 
         }
 
