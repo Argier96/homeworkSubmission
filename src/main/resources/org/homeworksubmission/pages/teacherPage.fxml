@@ -49,7 +49,7 @@
                <Insets left="30.0" top="30.0"/>
             </HBox.margin>
          </Button>
-         <Button id="signOutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="77.0" prefWidth="81.0"
+         <Button fx:id="signOutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="77.0" prefWidth="81.0"
                  style="-fx-background-color: transparent;" text="SignOut" textFill="WHITE">
             <opaqueInsets>
                <Insets/>
