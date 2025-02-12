@@ -10,7 +10,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
 import java.io.IOException;
+
 import static org.homeworksubmission.database.userDatabase.checkLogin;
 import static org.homeworksubmission.database.userDatabase.userExists;
 
@@ -21,12 +23,11 @@ public class LoginPageController {
     @FXML
     public PasswordField passwordInput;
 
-    //close application
+    // Close application
     @FXML
     protected void closeApplication() {
         closeCurrentStage();
     }
-
 
     @FXML
     protected void onLoginButtonClick() {
@@ -46,9 +47,9 @@ public class LoginPageController {
 
         // Redirect based on user role
         switch (userRole) {
-            case "student" -> redirectToPage("studentPage.fxml", "Student Dashboard");
-            case "teacher" -> redirectToPage("teacherPage.fxml", "Teacher Dashboard");
-            case "admin" -> redirectToPage("adminPage.fxml", "Admin Dashboard");
+            case "student" -> redirectToPage("studentPage.fxml", "Student Dashboard", userRole);
+            case "teacher" -> redirectToPage("teacherPage.fxml", "Teacher Dashboard", userRole);
+            case "admin" -> redirectToPage("adminPage.fxml", "Admin Dashboard", userRole);
             default -> showAlert(alert, "Username or password incorrect");
         }
 
@@ -62,17 +63,16 @@ public class LoginPageController {
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
 
         TextField userNameOrEmailInput = new TextField();
-        //styling userName or EmailInput
+        // Styling userName or EmailInput
         userNameOrEmailInput.setStyle(
-            "-fx-background-color: transparent;"+
-            "-fx-border-width: 0 0 2px 0;" +
-            "-fx-focus-color: blue;"+
-            "-fx-faint-focus-color: transparent;"+
-            "-fx-padding: 5 0 3 0;"+
-            "-fx-prompt-text-fill: gray;"+
-            "-fx-text-fill: black;"+
-            " -fx-border-color: transparent transparent deepskyblue;"
-
+                "-fx-background-color: transparent;" +
+                        "-fx-border-width: 0 0 2px 0;" +
+                        "-fx-focus-color: blue;" +
+                        "-fx-faint-focus-color: transparent;" +
+                        "-fx-padding: 5 0 3 0;" +
+                        "-fx-prompt-text-fill: gray;" +
+                        "-fx-text-fill: black;" +
+                        " -fx-border-color: transparent transparent deepskyblue;"
         );
 
         userNameOrEmailInput.setPrefWidth(300);
@@ -90,7 +90,8 @@ public class LoginPageController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.getDialogPane().setContent(grid);
         dialog.setTitle("Forget Password");
-// Style the dialog buttons
+
+        // Style the dialog buttons
         Button okButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
         Button cancelButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
 
@@ -109,7 +110,6 @@ public class LoginPageController {
                         "-fx-border-radius: 5px;"            // rounded button corners
         );
 
-
         dialog.showAndWait();
 
         // Handle dialog result
@@ -118,7 +118,7 @@ public class LoginPageController {
                 dialog.setTitle("Username or email is Required!!!");
                 dialog.showAndWait();
             } else if (userExists(userNameOrEmailInput.getText())) {
-                redirectToPage("resetPasswordView.fxml", "Reset Password");
+                redirectToPage("resetPasswordView.fxml", "Reset Password", null);
                 closeCurrentStage();
             }
         }
@@ -142,16 +142,29 @@ public class LoginPageController {
     }
 
     // Helper method to redirect to a new page
-    private void redirectToPage(String fxmlFile, String title) {
+    private void redirectToPage(String fxmlFile, String title, String userRole) {
         try {
+            // Close the current stage
             Stage currentStage = (Stage) userNameInput.getScene().getWindow();
             currentStage.close();
 
+            // Create a new stage
             Stage newStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource(fxmlFile));
+
+            // Set the controller dynamically based on user role
+            if ("student".equals(userRole)) {
+                StudentPageController studentController = new StudentPageController();
+                fxmlLoader.setController(studentController);// Set student controller
+            } else if ("teacher".equals(userRole)) {
+                TeacherPageController teacherController = new TeacherPageController();
+                fxmlLoader.setController(teacherController); // Set teacher controller
+                teacherController.setLoggedUserName(userNameInput.getText());
+            }
+
+            // Load and set the new scene
             Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
             newStage.setTitle(title);
-            // Remove window decorations (minimize, maximize, close buttons)
             newStage.initStyle(StageStyle.UNDECORATED);
             newStage.setScene(scene);
             newStage.show();
@@ -167,6 +180,4 @@ public class LoginPageController {
             currentStage.close();
         }
     }
-
-
 }

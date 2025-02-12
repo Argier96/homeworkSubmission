@@ -41,3 +41,60 @@
 .alert .button:hover {
     -fx-background-color: #0056b3; /* Darker blue when hovered */
 }
+/* Basic TableView Styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+
+}
+
+/* Table Headers Styling */
+.table-column-header {
+    -fx-background-color:  #4169E1;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-border-color: transparent;
+}
+
+/* Table Rows Styling */
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #34495E;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+}
+
+/* Hover effect for rows */
+.table-row-cell:hover {
+    -fx-background-color: #ecf0f1;
+    -fx-text-fill: white;
+}
+
+/* Selected Row Styling */
+.table-row-cell:filled:selected {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+}
+
+/* Cell Content Styling */
+.table-cell {
+    -fx-padding: 8;
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+    -fx-border-color: transparent;
+}
+
+/* Customize the action column */
+#actionColumn {
+    -fx-background-color: #f5f5f5;
+    -fx-font-size: 12px;
+    -fx-text-fill: #3498db;
+}
+
+
+
+

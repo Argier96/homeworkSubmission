@@ -1,6 +1,7 @@
 package org.homeworksubmission.database;
 
 public class user {
+    Integer id;
     String firstName;
     String lastName;
     String userName;
@@ -9,7 +10,8 @@ public class user {
     int role;
 
     //Constructor for user
-    public user(String firstName,String lastName ,String userName, String password, String email, int role) {
+    public user(Integer id,String firstName,String lastName ,String userName, String password, String email, int role) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -19,6 +21,12 @@ public class user {
     }
 
     //getter and setters
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getFirstName() {
         return firstName;
     }

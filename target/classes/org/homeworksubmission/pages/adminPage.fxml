@@ -24,7 +24,7 @@
                 </VBox.margin>
             </Text>
             <!-- Add Navigation Buttons -->
-            <Button id="homeBtn"  mnemonicParsing="false" onAction="#onHomeButtonClicked" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Home">
+            <Button id="homeBtn" mnemonicParsing="false" onAction="#onHomeButtonClicked" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Home">
                 <VBox.margin>
                     <Insets left="50.0" top="200.0" />
                 </VBox.margin>
@@ -56,7 +56,7 @@
             <Button id="addUserBtn" mnemonicParsing="false" onAction="#onUserAddButtonClicked" style="-fx-background-color: transparent;" text="Add User" textFill="WHITE">
                 <graphic>
                     <ImageView fitHeight="78.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../userAdd_icon.png"/>
+                        <Image url="@../userAdd_icon.png" />
                     </ImageView>
                 </graphic>
                 <font>
@@ -85,15 +85,16 @@
 
     <!-- Center Panel with Table -->
     <center>
-        <TableView fx:id="userTableView" prefHeight="400.0" prefWidth="800.0" visible="false" BorderPane.alignment="CENTER">
+        <TableView fx:id="userTableView" prefHeight="400.0" prefWidth="800.0" stylesheets="@style.css" visible="false" BorderPane.alignment="CENTER">
             <columns>
                 <!-- Table Columns -->
-                <TableColumn fx:id="firstNameColumn" prefWidth="125.0" text="First Name" />
+                <TableColumn fx:id="hashColumn" prefWidth="41.0" text="#" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="114.0" text="First Name" />
                 <TableColumn fx:id="lastNameColumn" prefWidth="125.0" text="Last Name" />
                 <TableColumn fx:id="usernameColumn" prefWidth="125.0" text="Username" />
                 <TableColumn fx:id="emailColumn" prefWidth="165.0" text="Email" />
-                <TableColumn fx:id="roleColumn" prefWidth="120.0" text="Role" />
-                <TableColumn fx:id="actionColumn" prefWidth="100.0" text="Actions" />
+                <TableColumn fx:id="roleColumn" prefWidth="101.0" text="Role" />
+                <TableColumn fx:id="actionColumn" prefWidth="99.0" text="Actions" />
             </columns>
         </TableView>
     </center>

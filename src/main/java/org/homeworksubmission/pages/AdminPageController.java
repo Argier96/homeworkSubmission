@@ -1,6 +1,8 @@
 package org.homeworksubmission.pages;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +24,8 @@ public class AdminPageController {
     @FXML
     public TableView<user> userTableView;
     @FXML
+    private TableColumn<user, Number> hashColumn;
+    @FXML
     private TableColumn<user, String> firstNameColumn;
     @FXML
     private TableColumn<user, String> lastNameColumn;
@@ -41,9 +45,15 @@ public class AdminPageController {
     // Define a custom button type for "Delete"
     private static final ButtonType DELETE_BUTTON = new ButtonType("Delete", ButtonBar.ButtonData.LEFT);
 
+
+
     @FXML
     public void initialize() {
         // Bind columns to user properties
+        hashColumn.setCellValueFactory(cellData -> {
+            int rowIndex = userTableView.getItems().indexOf(cellData.getValue());
+            return new SimpleIntegerProperty(rowIndex+1);
+        });
         firstNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastName()));
         usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUserName()));
@@ -53,6 +63,9 @@ public class AdminPageController {
         // Set up the action column with an "Edit" button
         actionColumn.setCellFactory(param -> {
             Button editButton = new Button("Edit");
+            editButton.setStyle("-fx-background-color: transparent;" +
+                    "-fx-text-fill: black;"+"-fx-border-width: 0 0 2px 0;"+ "-fx-border-color: black;");
+
             editButton.setOnAction(event -> {
                 user selectedUser = userTableView.getSelectionModel().getSelectedItem();
                 if (selectedUser != null) {

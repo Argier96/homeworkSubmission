@@ -89,6 +89,7 @@ public class userDatabase {
                 ResultSet resultSet = statement.executeQuery(query)){
             while (resultSet.next()) {
                 user user = new user(
+                        resultSet.getInt("user_id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("username"),
