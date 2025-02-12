@@ -34,10 +34,9 @@ public class AdminPageController {
     @FXML
     private TableColumn<user, Void> actionColumn;  // For edit buttons
 
+
     @FXML
-    public Button addUserButton;
-    @FXML
-    public Button signOutButton;
+    private Button signOutButton;
 
     // Define a custom button type for "Delete"
     private static final ButtonType DELETE_BUTTON = new ButtonType("Delete", ButtonBar.ButtonData.LEFT);
@@ -216,6 +215,16 @@ public class AdminPageController {
         loginStage.setScene(loginScene);
         loginStage.show();
         currentStage.close();
+    }
+
+    @FXML
+    private void onUserButtonClicked(){
+        userTableView.setVisible(true);
+        initialize();
+    }
+    @FXML
+    private void  onHomeButtonClicked(){
+        userTableView.setVisible(false);
     }
 
 }
