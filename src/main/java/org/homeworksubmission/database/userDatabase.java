@@ -190,7 +190,7 @@ public class userDatabase {
     }
 
         public static void main(String[] args) {
-
+            System.out.println(checkLogin("admin", "admin112"));
         }
 
     }
